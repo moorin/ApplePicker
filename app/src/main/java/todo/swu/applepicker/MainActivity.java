@@ -1,97 +1,58 @@
 package todo.swu.applepicker;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    Fragment fragmentDaily;
+    Fragment fragmentSNS;
+    Fragment fragmentOCR;
+    TextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        final TextView textView = (TextView) findViewById(R.id.textView);
-        final TextView readData = (TextView) findViewById(R.id.readData);
-        Button saveBtn = (Button) findViewById(R.id.saveBtn) ;
-        Button readBtn = (Button) findViewById(R.id.readBtn) ;
+        fragmentDaily = new FragmentDaily();
+        fragmentSNS = new FragmentSNS();
+        fragmentOCR = new FragmentOCR();
+        tv_title = (TextView)findViewById(R.id.tv_title);
 
 
-                readBtn.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Log.d(TAG, document.getId() + " => " + document.getData());
-                                        readData.setText(document.getId()+"=>"+document.getData());
-                                    }
-                                } else {
-                                    Log.w(TAG, "Error getting documents.", task.getException());
-                                }
-                    }});
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentDaily).commit();
+        // 초기화면 설정
 
-                saveBtn.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        textView.setText("Red");
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                item -> {
+                    switch (item.getItemId()) {
+                        case R.id.tab_daily:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentDaily).commit();
+                            tv_title.setText("Daily");
+                            return true;
 
-                        // Create a new user with a first and last name
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("first", "kim");
-                        user.put("last", "hyerin");
-                        user.put("born", 1999);
+                        case R.id.tab_sns:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentSNS).commit();
+                            tv_title.setText("SNS");
+                            return true;
 
-                        // Add a new document with a generated ID
-                        db.collection("users")
-                                .add(user)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w(TAG, "Error adding document", e);
-                                    }
-                                });
+                        case R.id.tab_ocr:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentOCR).commit();
+                            tv_title.setText("OCR");
+                            return true;
                     }
-
+                    return false;
                 });
-            }
-        });
-        Thread thread = new Thread() {
-            public void run() {
-                OcrExam api = new OcrExam();
-            }
-        };
-        thread.start();
-
     }
-
 }
