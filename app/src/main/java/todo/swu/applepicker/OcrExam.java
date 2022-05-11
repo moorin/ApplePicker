@@ -18,7 +18,7 @@ public class OcrExam {
         public static void main(String[] args) {
             String apiURL = "https://nxie8hhe8q.apigw.ntruss.com/custom/v1/15052/d9ca1275cb57d960372ef532fa2ff936a1f9e789c8af3e55617a0bd60c605d31/general";
             String secretKey = "R3NXT3dscldUa3FnYUxxUmFJZWR5R0FwRExIbFJ4b2M=";
-            String imageFile = "YOUR_IMAGE_FILE";
+            String imageFile = "ocr_image_test";
 
             try {
                 URL url = new URL(apiURL);
