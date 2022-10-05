@@ -3,10 +3,11 @@ buildscript {
     repositories {
         // Check that you have the following line (if not, add it):
         google()  // Google's Maven repository
+        mavenCentral()  // Maven Central repository
     }
     dependencies {
         // Add this line
-        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.gms:google-services:4.3.13'
     }
 }
 
@@ -21,6 +22,7 @@ allprojects {
     repositories {
         // Check that you have the following line (if not, add it):
         google()  // Google's Maven repository
+        mavenCentral()  // Maven Central repository
     }
 }
 task clean(type: Delete) {

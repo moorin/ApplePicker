@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "19540487214",
-    "project_id": "applepicker-a5482",
-    "storage_bucket": "applepicker-a5482.appspot.com"
+    "project_number": "399373841648",
+    "project_id": "applepicker-19155",
+    "storage_bucket": "applepicker-19155.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:19540487214:android:f542f0bbf778a1b87e03bf",
+        "mobilesdk_app_id": "1:399373841648:android:43ab7d85d965998d647e35",
         "android_client_info": {
           "package_name": "todo.swu.applepicker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "19540487214-ikuah0ron2q31tl1t4165m93tgls8cmg.apps.googleusercontent.com",
+          "client_id": "399373841648-urqdr2hanf1j336r179hbmd2ujhe1gjj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpWPJZY7GtrTE5zcP2mesXAqxOrEr6O_M"
+          "current_key": "AIzaSyDg8TMw2ZMox5-1UBDETwmW-uQKMEUtKcI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "19540487214-ikuah0ron2q31tl1t4165m93tgls8cmg.apps.googleusercontent.com",
+              "client_id": "399373841648-urqdr2hanf1j336r179hbmd2ujhe1gjj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -41,9 +41,10 @@ public class OcrEditActivity extends AppCompatActivity {
         String jsonResponse = receive_intent.getStringExtra("jsonResponse");
         String imagePath = receive_intent.getStringExtra("imagePath");
         List<String> inferTextList = new ArrayList<String>();
+        Log.e("test", "json 파싱 실행 전");
         // OCR 글자들 모음 List
         inferTextList = jsonParsing(jsonResponse);
-
+        Log.e("test", "json 파싱 실행 후");
         Log.e(imagePath.toString(), "imagePath");
         Log.e(inferTextList.toString(), "inferTextList");
 
@@ -98,7 +99,7 @@ public class OcrEditActivity extends AppCompatActivity {
     private List jsonParsing(String json)
     {
         List<String> inferTextList = new ArrayList<String>();
-        Log.e("Test", "1");
+        Log.e("in jsonParsing Test", "1");
         try{
             JSONObject imagesJsonObject = new JSONObject(json);
             JSONArray imagesArray = imagesJsonObject.getJSONArray("images");
@@ -107,7 +108,6 @@ public class OcrEditActivity extends AppCompatActivity {
             imagesJson = removeChar(imagesJson, 0);
             int len = imagesJson.length()-1;
             imagesJson = removeChar(imagesJson, len);
-            Log.e(imagesArray.toString(), "imagesArray");
 
             JSONObject fieldsJsonObject = new JSONObject(imagesJson);
             JSONArray fieldsArray = fieldsJsonObject.getJSONArray("fields");
@@ -123,6 +123,7 @@ public class OcrEditActivity extends AppCompatActivity {
         }catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("in jsonParsing Test", "2");
         return inferTextList;
     }
 }
